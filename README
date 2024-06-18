@@ -1,0 +1,72 @@
+# DIT IP Info Tool
+
+## Description
+The DIT IP Info Tool is a versatile application built using Python and the Tkinter library. It provides a user-friendly graphical interface to perform various network-related tasks such as retrieving IP information, pinging IP addresses, conducting DNS lookups, performing Nmap scans, and more.
+
+## Features
+- **IP Info:** Retrieve detailed information about a given IP address using the IP-API service.
+- **Ping IP:** Ping an IP address to check its connectivity.
+- **Get Website IP:** Resolve the IP address of a given website URL.
+- **Get Local IP:** Retrieve the local IP address of the machine running the tool.
+- **Nmap Scan:** Perform an Nmap scan on a given IP address.
+- **DNS Lookup:** Perform a DNS lookup to find the hostname associated with an IP address.
+- **Port Check:** Check if a specific port on a given IP address is open or closed.
+- **Traceroute:** Perform a traceroute to a given IP address.
+- **Geolocation:** Retrieve geolocation information for a given IP address using the ipinfo.io service.
+- **Scan for Open Ports:** Scan a given IP address for open ports.
+- **Restrict Access:** (Feature requires admin privileges) Display a message indicating restriction of access to a given IP address.
+- **Discover Personal Info:** Retrieve personal information associated with a given IP address using the ipinfo.io service.
+- **Vulnerability Finder:** Perform an Nmap scan with vulnerability detection on a given IP address.
+- **Exploit IP:** (Ethical considerations required) Display a message indicating exploitation of a given IP address.
+- **Check Web Server Paths:** Check common web server paths on a given IP address.
+- **Developer:** Open the developer's website.
+
+## Installation
+1. Clone the repository or download the source code.
+2. Ensure you have Python installed on your machine.
+3. Install the required Python libraries using pip:
+   ```bash
+   pip install tkinter requests nmap
+
+Usage
+Run the dit_ip_info.py file to start the application:
+bash
+Copy code
+python dit_ip_info.py
+The main window will open, displaying various buttons for different functions.
+Click on any function button to open a new window where you can enter the required information and execute the task.
+Functions
+IP Info
+Enter an IP address to get detailed information such as country, region, city, ISP, etc.
+Ping IP
+Enter an IP address to ping it and check connectivity.
+Get Website IP
+Enter a website URL to resolve its IP address.
+Get Local IP
+Retrieve the local IP address of your machine.
+Nmap Scan
+Enter an IP address to perform an Nmap scan and display all hosts.
+DNS Lookup
+Enter an IP address to perform a DNS lookup and get the hostname.
+Port Check
+Enter an IP address and port number to check if the port is open or closed.
+Traceroute
+Enter an IP address to perform a traceroute and display the route taken.
+Geolocation
+Enter an IP address to get geolocation information.
+Scan for Open Ports
+Enter an IP address to scan for all open ports.
+Restrict Access
+Enter an IP address to restrict access (displays a message indicating restriction).
+Discover Personal Info
+Enter an IP address to discover personal information associated with it.
+Vulnerability Finder
+Enter an IP address to perform an Nmap vulnerability scan.
+Exploit IP
+Enter an IP address to display a message indicating exploitation.
+Check Web Server Paths
+Enter an IP address to check common web server paths.
+Developer
+Opens the developer's website in the default web browser.
+Developer
+Visit the developer's website for more information and updates.

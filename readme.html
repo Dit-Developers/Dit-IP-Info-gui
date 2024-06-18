@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIT IP Info Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #333;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            margin-right: 0.5rem;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar .nav-links li {
+            margin-left: 1rem;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #00a2ff;
+        }
+        .li:hover {
+            text-decoration: none; /* Remove default underline */
+        }
+
+        .li {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 3px; /* Adjust as needed */
+            transition: all 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .li::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px; /* Height of the underline */
+            background-color: #007bff; /* Color of the underline */
+            visibility: hidden;
+            transform: scaleX(0) translateY(100%); /* Initial position below the text */
+            transition: all 0.3s ease; /* Smooth transition for underline animation */
+        }
+
+        .li:hover::before {
+            visibility: visible;
+            transform: scaleX(1) translateY(-100%); /* Move the underline up on hover */
+        }
+
+        .hero {
+            background-image: url(bg.png);
+            color: #000000;
+            padding: 10rem 0;
+            animation: fadeIn 1s ease-in-out;
+            margin-top: 4rem; /* Adjust for fixed navbar */
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero .btn {
+            background-color: #00a2ff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .btn:hover {
+            background-color: #1573a9;
+        }
+
+        header, main {
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #f4f4f9;
+            color: #555;
+        }
+
+        h1, h2 {
+            margin-bottom: 1rem;
+        }
+
+        p, ul, ol, code {
+            margin-bottom: 1rem;
+        }
+
+        ol {
+            list-style: decimal inside;
+        }
+
+        code {
+            background-color: #f4f4f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+
+        ul {
+            list-style: disc inside;
+        }
+
+        ul li, ol li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .navbar .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .hero {
+                padding: 5rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            header, main, footer {
+                padding: 1rem;
+            }
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+            transition: color 0.3s ease-in-out;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        footer a:hover {
+            color: #007bff;
+        }
+
+        footer:hover p {
+            color: #007bff;
+        }
+
+        footer .animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,99,71,0.2) 20%, rgba(0,0,0,0) 80%);
+            animation: spin 20s linear infinite;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo li">
+                <img src="ip.png" width="40px" alt="Hero Image" class="hero-img">
+                IP Info Tool
+            </a>
+            <ul class="nav-links">
+                <li class="li"><a href="#hero">Home</a></li>
+                <li class="li"><a href="#features">Features</a></li>
+                <li class="li"><a href="#footer">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <h1>Welcome to the IP Info Lookup GUI Tool</h1>
+            <p>Retrieve detailed information about any IP address with ease.</p>
+            <a href="#features" class="btn">Learn More</a>
+        </div>
+    </section>
+    <header>
+        <h1>DIT IP Info Tool</h1>
+    </header>
+    <main>
+        <section id="description">
+            <h2>Description</h2>
+            <p>The DIT IP Info Tool is a versatile application built using Python and the Tkinter library. It provides a user-friendly graphical interface to perform various network-related tasks such as retrieving IP information, pinging IP addresses, conducting DNS lookups, performing Nmap scans, and more.</p>
+        </section>
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li><strong>IP Info:</strong> Retrieve detailed information about a given IP address using the IP-API service.</li>
+                <li><strong>Ping IP:</strong> Ping an IP address to check its connectivity.</li>
+                <li><strong>Get Website IP:</strong> Resolve the IP address of a given website URL.</li>
+                <li><strong>Get Local IP:</strong> Retrieve the local IP address of the machine running the tool.</li>
+                <li><strong>Nmap Scan:</strong> Perform an Nmap scan on a given IP address.</li>
+                <li><strong>DNS Lookup:</strong> Perform a DNS lookup to find the hostname associated with an IP address.</li>
+                <li><strong>Port Check:</strong> Check if a specific port on a given IP address is open or closed.</li>
+                <li><strong>Traceroute:</strong> Perform a traceroute to a given IP address.</li>
+                <li><strong>Geolocation:</strong> Retrieve geolocation information for a given IP address using the ipinfo.io service.</li>
+                <li><strong>Scan for Open Ports:</strong> Scan a given IP address for open ports.</li>
+                <li><strong>Restrict Access:</strong> (Feature requires admin privileges) Display a message indicating restriction of access to a given IP address.</li>
+                <li><strong>Discover Personal Info:</strong> Retrieve personal information associated with a given IP address using the ipinfo.io service.</li>
+                <li><strong>Vulnerability Finder:</strong> Perform an Nmap scan with vulnerability detection on a given IP address.</li>
+                <li><strong>Exploit IP:</strong> (Ethical considerations required) Display a message indicating exploitation of a given IP address.</li>
+                <li><strong>Check Web Server Paths:</strong> Check common web server paths on a given IP address.</li>
+                <li><strong>Developer:</strong> Open the developer's website.</li>
+            </ul>
+        </section>
+        <section id="installation">
+            <h2>Installation</h2>
+            <ol>
+                <li>Clone the repository or download the source code.</li>
+                <li>Ensure you have Python installed on your machine.</li>
+                <li>Install the required Python libraries using pip:
+                    <code>pip install tkinter requests nmap</code>
+                </li>
+            </ol>
+        </section>
+        <section id="usage">
+            <h2>Usage</h2>
+            <p>Run the <code>dit_ip_info.py</code> file to start the application:</p>
+            <code>python dit_ip_info.py</code>
+            <p>The main window will open, displaying various buttons for different functions.</p>
+            <p>Click on any function button to open a new window where you can enter the required information and execute the task.</p>
+        </section>
+        <section id="functions">
+            <h2>Functions</h2>
+            <ul>
+                <li><strong>IP Info:</strong> Enter an IP address to get detailed information such as country, region, city, ISP, etc.</li>
+                <li><strong>Ping IP:</strong> Enter an IP address to ping it and check connectivity.</li>
+                <li><strong>Get Website IP:</strong> Enter a website URL to get its IP address.</li>
+                <li><strong>Get Local IP:</strong> Get the local IP address of the machine running the tool.</li>
+                <li><strong>Nmap Scan:</strong> Enter an IP address to perform an Nmap scan and get information about open ports and services.</li>
+                <li><strong>DNS Lookup:</strong> Enter an IP address to perform a DNS lookup and get the associated hostname.</li>
+                <li><strong>Port Check:</strong> Enter an IP address and a port number to check if the port is open or closed.</li>
+                <li><strong>Traceroute:</strong> Enter an IP address to perform a traceroute and display the path taken by packets to reach the destination.</li>
+                <li><strong>Geolocation:</strong> Enter an IP address to get geolocation information such as latitude, longitude, and timezone.</li>
+                <li><strong>Scan for Open Ports:</strong> Enter an IP address to scan for open ports and display the results.</li>
+                <li><strong>Restrict Access:</strong> Enter an IP address to display a message indicating restriction of access to that IP address (requires admin privileges).</li>
+                <li><strong>Discover Personal Info:</strong> Enter an IP address to retrieve personal information such as the owner's name, organization, and contact details (using ipinfo.io service).</li>
+                <li><strong>Vulnerability Finder:</strong> Enter an IP address to perform an Nmap scan with vulnerability detection and display the results.</li>
+                <li><strong>Exploit IP:</strong> Enter an IP address to display a message indicating exploitation of that IP address (ethical considerations required).</li>
+                <li><strong>Check Web Server Paths:</strong> Enter an IP address to check common web server paths and display the results.</li>
+                <li><strong>Developer:</strong> Click the button to open the developer's website in a web browser.</li>
+            </ul>
+        </section>
+    </main>
+    <footer id="footer">
+        <p>&copy; 2024 DIT Developers. All rights reserved.</p>
+    </footer>
+</body>
+</html>
